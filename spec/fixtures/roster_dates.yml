@@ -1,0 +1,6 @@
+michael_wednesday:
+  id: 1
+  company_id: 1
+  employee_id: 1
+  date: <%= Date.parse("20120321") %>
+  locked: true

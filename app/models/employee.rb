@@ -20,9 +20,9 @@ class Employee < ActiveRecord::Base
 
   scope :company, lambda { |company|
     joins(:company_employees).
-    where(company_employees: { id: company[:id] })
+    where(company_employees: { company_id: company[:id] })
   }
-  
+
   accepts_nested_attributes_for :employee_rates,
       reject_if: :all_blank,
       allow_destroy: true
@@ -35,7 +35,7 @@ class Employee < ActiveRecord::Base
   end
 
   def destroy
-    touch(:deleted_at)
+    touch :deleted_at
   end
 
   def authorized?(klass, *operations)

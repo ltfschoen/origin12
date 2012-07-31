@@ -27,7 +27,7 @@ end
 
 group :development, :test do
   gem 'heroku', '2.16.0'
-  gem 'rspec-rails', '~> 2.6'
+  gem 'rspec-rails', '~> 2.11'
   gem 'autotest'
   gem 'autotest-rails'
 end

@@ -26,7 +26,7 @@ describe RostersController do
   def valid_attributes
     {}
   end
-  
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # RostersController. Be sure to keep this updated too.
@@ -36,6 +36,7 @@ describe RostersController do
 
   describe "GET index" do
     it "assigns all rosters as @rosters" do
+      pending
       roster = Roster.create! valid_attributes
       get :index, {}, valid_session
       assigns(:rosters).should eq([roster])
@@ -44,6 +45,7 @@ describe RostersController do
 
   describe "GET show" do
     it "assigns the requested roster as @roster" do
+      pending
       roster = Roster.create! valid_attributes
       get :show, {:id => roster.to_param}, valid_session
       assigns(:roster).should eq(roster)
@@ -52,6 +54,7 @@ describe RostersController do
 
   describe "GET new" do
     it "assigns a new roster as @roster" do
+      pending
       get :new, {}, valid_session
       assigns(:roster).should be_a_new(Roster)
     end
@@ -59,6 +62,7 @@ describe RostersController do
 
   describe "GET edit" do
     it "assigns the requested roster as @roster" do
+      pending
       roster = Roster.create! valid_attributes
       get :edit, {:id => roster.to_param}, valid_session
       assigns(:roster).should eq(roster)
@@ -68,18 +72,21 @@ describe RostersController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Roster" do
+        pending
         expect {
           post :create, {:roster => valid_attributes}, valid_session
         }.to change(Roster, :count).by(1)
       end
 
       it "assigns a newly created roster as @roster" do
+        pending
         post :create, {:roster => valid_attributes}, valid_session
         assigns(:roster).should be_a(Roster)
         assigns(:roster).should be_persisted
       end
 
       it "redirects to the created roster" do
+        pending
         post :create, {:roster => valid_attributes}, valid_session
         response.should redirect_to(Roster.last)
       end
@@ -88,6 +95,7 @@ describe RostersController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved roster as @roster" do
         # Trigger the behavior that occurs when invalid params are submitted
+        pending
         Roster.any_instance.stub(:save).and_return(false)
         post :create, {:roster => {}}, valid_session
         assigns(:roster).should be_a_new(Roster)
@@ -95,6 +103,7 @@ describe RostersController do
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
+        pending
         Roster.any_instance.stub(:save).and_return(false)
         post :create, {:roster => {}}, valid_session
         response.should render_template("new")
@@ -105,6 +114,7 @@ describe RostersController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested roster" do
+        pending
         roster = Roster.create! valid_attributes
         # Assuming there are no other rosters in the database, this
         # specifies that the Roster created on the previous line
@@ -115,12 +125,14 @@ describe RostersController do
       end
 
       it "assigns the requested roster as @roster" do
+        pending
         roster = Roster.create! valid_attributes
         put :update, {:id => roster.to_param, :roster => valid_attributes}, valid_session
         assigns(:roster).should eq(roster)
       end
 
       it "redirects to the roster" do
+        pending
         roster = Roster.create! valid_attributes
         put :update, {:id => roster.to_param, :roster => valid_attributes}, valid_session
         response.should redirect_to(roster)
@@ -129,6 +141,7 @@ describe RostersController do
 
     describe "with invalid params" do
       it "assigns the roster as @roster" do
+        pending
         roster = Roster.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Roster.any_instance.stub(:save).and_return(false)
@@ -137,6 +150,7 @@ describe RostersController do
       end
 
       it "re-renders the 'edit' template" do
+        pending
         roster = Roster.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Roster.any_instance.stub(:save).and_return(false)
@@ -148,6 +162,7 @@ describe RostersController do
 
   describe "DELETE destroy" do
     it "destroys the requested roster" do
+      pending
       roster = Roster.create! valid_attributes
       expect {
         delete :destroy, {:id => roster.to_param}, valid_session
@@ -155,6 +170,7 @@ describe RostersController do
     end
 
     it "redirects to the rosters list" do
+      pending
       roster = Roster.create! valid_attributes
       delete :destroy, {:id => roster.to_param}, valid_session
       response.should redirect_to(rosters_url)

@@ -9,6 +9,7 @@ describe "rosters/index" do
   end
 
   it "renders a list of rosters" do
+    pending
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
   end

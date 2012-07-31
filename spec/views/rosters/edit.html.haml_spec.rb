@@ -6,6 +6,7 @@ describe "rosters/edit" do
   end
 
   it "renders the edit roster form" do
+    pending
     render
 
     # Run the generator again with the --webrat flag if you want to use webrat matchers

@@ -1,15 +1,15 @@
 class Project < ActiveRecord::Base
 
   attr_accessible \
-      :description,
-      :manager_id,
-      :parent_id,
-      :name,
-      :short_name,
-      :start_date,
-      :end_date,
-      :budget_days,
-      :budget_amount
+    :description,
+    :manager_id,
+    :parent_id,
+    :name,
+    :short_name,
+    :start_date,
+    :end_date,
+    :budget_days,
+    :budget_amount
 
   alias_attribute :display_name, :name
 

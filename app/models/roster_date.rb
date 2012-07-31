@@ -5,11 +5,13 @@ class RosterDate < ActiveRecord::Base
 
   attr_accessible \
     :date,
+    :company_id,
     :employee_id,
     :locked,
     :rosters_attributes
 
-  validates_uniqueness_of :date, scope: [ :company_id, :employee_id ]
+  validates_uniqueness_of :date,
+    scope: [ :company_id, :employee_id ]
 
   belongs_to :employee
   belongs_to :company

@@ -1,7 +1,7 @@
 class Activity < ActiveRecord::Base
 
   attr_accessible \
-      :companyid,
+      :company_id,
       :default,
       :description,
       :display_order,

@@ -6,6 +6,7 @@ describe "roster_dates/show" do
   end
 
   it "renders attributes in <p>" do
+    pending
     render
     # Run the generator again with the --webrat flag if you want to use webrat matchers
   end

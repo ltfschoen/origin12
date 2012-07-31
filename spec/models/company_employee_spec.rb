@@ -1,5 +1,11 @@
 require 'spec_helper'
 
 describe CompanyEmployee do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  def attributes
+    { company_id: 666, employee_id: 777 }
+  end
+
+  it_behaves_like "accessible attributes"
+
 end

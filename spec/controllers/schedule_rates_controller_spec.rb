@@ -26,7 +26,7 @@ describe ScheduleRatesController do
   def valid_attributes
     {}
   end
-  
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # ScheduleRatesController. Be sure to keep this updated too.
@@ -36,6 +36,7 @@ describe ScheduleRatesController do
 
   describe "GET index" do
     it "assigns all schedule_rates as @schedule_rates" do
+      pending
       schedule_rate = ScheduleRate.create! valid_attributes
       get :index, {}, valid_session
       assigns(:schedule_rates).should eq([schedule_rate])
@@ -44,6 +45,7 @@ describe ScheduleRatesController do
 
   describe "GET show" do
     it "assigns the requested schedule_rate as @schedule_rate" do
+      pending
       schedule_rate = ScheduleRate.create! valid_attributes
       get :show, {:id => schedule_rate.to_param}, valid_session
       assigns(:schedule_rate).should eq(schedule_rate)
@@ -52,6 +54,7 @@ describe ScheduleRatesController do
 
   describe "GET new" do
     it "assigns a new schedule_rate as @schedule_rate" do
+      pending
       get :new, {}, valid_session
       assigns(:schedule_rate).should be_a_new(ScheduleRate)
     end
@@ -59,6 +62,7 @@ describe ScheduleRatesController do
 
   describe "GET edit" do
     it "assigns the requested schedule_rate as @schedule_rate" do
+      pending
       schedule_rate = ScheduleRate.create! valid_attributes
       get :edit, {:id => schedule_rate.to_param}, valid_session
       assigns(:schedule_rate).should eq(schedule_rate)
@@ -68,18 +72,21 @@ describe ScheduleRatesController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new ScheduleRate" do
+        pending
         expect {
           post :create, {:schedule_rate => valid_attributes}, valid_session
         }.to change(ScheduleRate, :count).by(1)
       end
 
       it "assigns a newly created schedule_rate as @schedule_rate" do
+        pending
         post :create, {:schedule_rate => valid_attributes}, valid_session
         assigns(:schedule_rate).should be_a(ScheduleRate)
         assigns(:schedule_rate).should be_persisted
       end
 
       it "redirects to the created schedule_rate" do
+        pending
         post :create, {:schedule_rate => valid_attributes}, valid_session
         response.should redirect_to(ScheduleRate.last)
       end
@@ -88,6 +95,7 @@ describe ScheduleRatesController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved schedule_rate as @schedule_rate" do
         # Trigger the behavior that occurs when invalid params are submitted
+        pending
         ScheduleRate.any_instance.stub(:save).and_return(false)
         post :create, {:schedule_rate => {}}, valid_session
         assigns(:schedule_rate).should be_a_new(ScheduleRate)
@@ -95,6 +103,7 @@ describe ScheduleRatesController do
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
+        pending
         ScheduleRate.any_instance.stub(:save).and_return(false)
         post :create, {:schedule_rate => {}}, valid_session
         response.should render_template("new")
@@ -105,6 +114,7 @@ describe ScheduleRatesController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested schedule_rate" do
+        pending
         schedule_rate = ScheduleRate.create! valid_attributes
         # Assuming there are no other schedule_rates in the database, this
         # specifies that the ScheduleRate created on the previous line
@@ -115,12 +125,14 @@ describe ScheduleRatesController do
       end
 
       it "assigns the requested schedule_rate as @schedule_rate" do
+        pending
         schedule_rate = ScheduleRate.create! valid_attributes
         put :update, {:id => schedule_rate.to_param, :schedule_rate => valid_attributes}, valid_session
         assigns(:schedule_rate).should eq(schedule_rate)
       end
 
       it "redirects to the schedule_rate" do
+        pending
         schedule_rate = ScheduleRate.create! valid_attributes
         put :update, {:id => schedule_rate.to_param, :schedule_rate => valid_attributes}, valid_session
         response.should redirect_to(schedule_rate)
@@ -129,6 +141,7 @@ describe ScheduleRatesController do
 
     describe "with invalid params" do
       it "assigns the schedule_rate as @schedule_rate" do
+        pending
         schedule_rate = ScheduleRate.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ScheduleRate.any_instance.stub(:save).and_return(false)
@@ -137,6 +150,7 @@ describe ScheduleRatesController do
       end
 
       it "re-renders the 'edit' template" do
+        pending
         schedule_rate = ScheduleRate.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         ScheduleRate.any_instance.stub(:save).and_return(false)
@@ -148,6 +162,7 @@ describe ScheduleRatesController do
 
   describe "DELETE destroy" do
     it "destroys the requested schedule_rate" do
+      pending
       schedule_rate = ScheduleRate.create! valid_attributes
       expect {
         delete :destroy, {:id => schedule_rate.to_param}, valid_session
@@ -155,6 +170,7 @@ describe ScheduleRatesController do
     end
 
     it "redirects to the schedule_rates list" do
+      pending
       schedule_rate = ScheduleRate.create! valid_attributes
       delete :destroy, {:id => schedule_rate.to_param}, valid_session
       response.should redirect_to(schedule_rates_url)

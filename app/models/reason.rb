@@ -1,10 +1,10 @@
 class Reason < ActiveRecord::Base
 
   attr_accessible \
-      :background_color,
-      :color,
-      :company,
-      :description
+    :background_color,
+    :color,
+    :company_id,
+    :description
 
   after_create :initialize_key
 

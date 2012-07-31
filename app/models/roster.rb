@@ -1,13 +1,13 @@
 class Roster < ActiveRecord::Base
 
   attr_accessible \
-      :customer_id,
-      :project_id,
-      :roster_date,
-      :activity_id,
-      :description,
-      :hours,
-      :shift
+    :customer_id,
+    :project_id,
+    :roster_date,
+    :activity_id,
+    :description,
+    :hours,
+    :shift
 
   belongs_to :company
   belongs_to :customer
