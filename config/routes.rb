@@ -9,13 +9,13 @@ Origin12::Application.routes.draw do
   end
 
   resources :teams, except: [ :show ]
-  
+
   resources :employees, except: [ :show ] do
     collection { get :switch }
+    collection { get :rosters, :action => 'index', view: 'rosters' }
   end
 
   # AJAX get a collection of projects for selected customer
-
   resources :projects, only: [ :index, :new, :create, :update ] do
     resources :schedule_rates, only: [ :index, :new, :create ]
   end
@@ -23,7 +23,6 @@ Origin12::Application.routes.draw do
   resources :roster_dates, :controller => 'roster_dates'
 
   # To duplication a week of roster dates
-
   get  'roster_dates/:duplicate_date/copy' \
       => 'roster_dates#copy',
       as: 'copy_roster_date'
@@ -33,8 +32,9 @@ Origin12::Application.routes.draw do
       as: 'copy_roster_dates'
 
   # Human-readable shortcut to RosterDate resources
-
   get 'roster' => 'roster_dates#index'
+
+  # resources :activities
 
   root :to => 'roster_dates#index'
 

@@ -59,11 +59,11 @@ private
   ### Exposures
 
   helper_method \
-      :project,
-      :schedule_rates,
-      :schedule_rate,
-      :most_recent_schedule_rate,
-      :return_to_path
+    :project,
+    :schedule_rates,
+    :schedule_rate,
+    :most_recent_schedule_rate,
+    :return_to_path
 
   def project
     @project ||= begin

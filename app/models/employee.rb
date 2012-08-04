@@ -1,5 +1,7 @@
 class Employee < ActiveRecord::Base
 
+  DEFAULT_ORDER = "employees.key"
+
   attr_accessible \
     :key,
     :first_name,
@@ -18,9 +20,13 @@ class Employee < ActiveRecord::Base
   has_many :schedule_rates
   has_many :roster_dates
 
-  scope :company, lambda { |company|
+  scope :company, ->(company) {
     joins(:company_employees).
     where(company_employees: { company_id: company[:id] })
+  }
+
+  scope :default_order, ->(attribute) {
+    order attribute || DEFAULT_ORDER
   }
 
   accepts_nested_attributes_for :employee_rates,
@@ -33,6 +39,14 @@ class Employee < ActiveRecord::Base
   def full_name
     [ self.first_name, self.last_name ].compact.join(' ')
   end
+
+  # def roster_date(date, company)
+  #   roster_date = roster_dates(date).company(company).limit(1).first
+  #   if roster_date.nil?
+  #     roster_date = roster_dates.company(company).date(date).create!
+  #   end
+  #   roster_date
+  # end
 
   def destroy
     touch :deleted_at

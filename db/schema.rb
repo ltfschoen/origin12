@@ -19,9 +19,10 @@ ActiveRecord::Schema.define(:version => 20120714100134) do
     t.string   "description"
     t.integer  "display_order"
     t.string   "color"
+    t.string   "background_color"
     t.boolean  "default"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.date     "deleted_at"
   end
 

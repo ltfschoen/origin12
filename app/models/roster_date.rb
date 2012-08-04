@@ -1,7 +1,9 @@
 class RosterDate < ActiveRecord::Base
 
   MAXIMUM_SHIFTS = 3
+  HOURS_PER_DAY  = 8.0
   ETERNITY_DATE  = Date.parse('9999-12-31')
+  DEFAULT_ORDER  = "date ASC"
 
   attr_accessible \
     :date,
@@ -18,7 +20,7 @@ class RosterDate < ActiveRecord::Base
 
   has_many :rosters, :dependent => :destroy
 
-  scope :week, lambda { |date|
+  scope :week, ->(date) {
     where(date: date.beginning_of_week(:sunday)..(date.end_of_week(:saturday) + 1.day))
   }
 
@@ -26,6 +28,12 @@ class RosterDate < ActiveRecord::Base
     # mysql: where([ '((weekday(`date`) + 1) % 7) in (?)', wdays])
     where([ 'EXTRACT(DOW FROM date)::NUMERIC IN (?)', wdays])
   }
+
+  scope :date, ->(date) {
+    where date: date
+  }
+
+  scope :default_order, order(DEFAULT_ORDER)
 
   scope :employee, lambda { |employee| where(employee_id: employee[:id]) }
 

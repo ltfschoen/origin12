@@ -1,5 +1,37 @@
 .employees  {
 
+  &.index.rosters {
+    th,
+    td.employee_key {
+      white-space: nowrap;
+    }
+    th.beginning_of_week,
+    th.wday_6,
+    .employee_key {
+      border-right: 1px solid grey;
+    }
+    td.wday {
+      padding: 0;
+      background-color: red;
+      border-right: 1px solid white;
+      border-top: 1px solid white;
+      a {
+        display: block;
+        height: <%= EmployeesHelper::ROSTER_HEIGHT %>px;
+        max-height: <%= EmployeesHelper::ROSTER_HEIGHT %>px;
+        &:hover {
+          text-decoration: none;
+        }
+      }
+    }
+    tbody tr:first-child td {
+      border-top: none;
+    }
+    td.wday_6 {
+      border-right: 1px solid grey;
+    }
+  }
+
   form {
     .field {
       display: block;
@@ -13,7 +45,6 @@
       border: 1px solid #CCC;
       padding: 4px;
     }
-
     .employee_started_at,
     .employee_terminated_at,
     .until {
@@ -29,25 +60,24 @@
         }
       }
     }
-
-    table.employee_rates {    
+    table.employee_rates {
       width: 100%;
       max-width: 100%;
-      
+
       td {
         padding: 5px;
       }
-      
+
       th {
         font-weight: bold;
         padding-left: 0.5em;
         padding-bottom: 0.5em;
       }
-      
+
       td, th {
         text-align: left;
       }
-      
+
       input[type='text'] {
         width: 4em;
       }

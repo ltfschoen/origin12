@@ -27,19 +27,21 @@
             = link_to 'Admin', '#'
             %ul
               %li= link_to 'Companies', companies_path
-              %li= link_to 'Customers', customers_path 
+              %li= link_to 'Customers', customers_path
               %li= link_to 'Projects', projects_path
               %li= link_to 'Employees', employees_path
               %li= link_to 'Teams', teams_path
+              %li= link_to 'Rosters', rosters_employees_path
           - employees = current_company.employees
           - if employees.length > 1
             %li.employee_switch
               = form_tag switch_employees_path, method: :get do |f|
                 = select_tag :id, options_from_collection_for_select(employees, "id", "full_name", current_employee[:id]), id: 'employee_switch'
           - else
-            = link_to current_employee.full_name, '#' 
+            = link_to current_employee.full_name, '#'
     .container_12
       = yield
+    = content_for :exocontainer_12
     .footer
       About | Contact Us | Help
     :javascript

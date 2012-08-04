@@ -88,7 +88,13 @@ private
   ### Exposures
 
   def roster_dates
-    @roster_dates ||= current_employee.roster_dates.company(current_company)
+    @roster_dates ||= begin
+      current_employee.roster_dates.
+        company(current_company).
+        includes(:rosters).
+        default_order.
+        merge(Roster.default_order)
+    end
   end
 
   def roster_date

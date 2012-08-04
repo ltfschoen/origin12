@@ -1,0 +1,33 @@
+- content_for :exocontainer_12 do
+  .employees.index.rosters
+    %h1 #{current_company.display_name} Roster Overview
+    .grid_12.clearfix
+      %table
+        %thead
+          %tr
+            %th.employee_key{ rowspan: '2' } Name
+            - roster_dates_group_by_beginning_of_week.keys.each do |date|
+              %th.beginning_of_week{ colspan: '7' } #{date.strftime '%b %d'}
+          %tr
+            - roster_dates_group_by_beginning_of_week.values.each do |dates|
+              - dates.each do |date|
+                %th{ wday_class(date) } #{(date.strftime '%^a')[0]}
+        %tbody
+          - employees.each do |employee|
+            %tr{ color_cycle }
+              %td.employee_key= employee.full_name
+              - roster_dates_group_by_beginning_of_week.values.each do |dates_of_week|
+                - dates_of_week.each do |date|
+                  - roster_date = employee_roster_date employee, date
+                  %td.wday{ (wday_class date) }
+                    - if roster_date
+                      - rosters = roster_date.rosters
+                      - total_hours = rosters.sum(&:hours)
+                      = link_to (edit_roster_date_path roster_date) do
+                        - rosters.each do |roster|
+                          %div{ (class_for roster, total_hours), (title_for roster) }
+                            &nbsp;
+          %tr
+            %td{ colspan: "#{13 * 7 + 2}" }
+              .actions
+                =# link_to 'Add New Employee', new_employee_path

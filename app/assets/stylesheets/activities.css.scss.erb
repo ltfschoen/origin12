@@ -1,0 +1,10 @@
+// Place all the styles related to the Activities controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+<% Activity.all.each do |activity| %>
+  <%= ".activity_#{activity[:id]}" %> {
+    color: <%= activity.color %> !important;
+    background-color: <%= activity.background_color %> !important;
+  }
+<% end %>

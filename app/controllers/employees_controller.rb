@@ -1,8 +1,10 @@
 class EmployeesController < ApplicationController
 
   helper_method \
-      :employees,
-      :employee
+    :employee,
+    :employees,
+    :rosters_end_date,
+    :rosters_start_date
 
   before_filter :new_employee, only: [ :new, :create ]
 
@@ -10,13 +12,15 @@ class EmployeesController < ApplicationController
 
   before_filter :set_current_employee, only: [ :switch ]
 
+  after_filter :set_return_to_employees_index, only: [ :index ]
+
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to employees_path
   end
 
   def index
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: employees }
     end
   end
@@ -34,10 +38,10 @@ class EmployeesController < ApplicationController
 #     format.json { render json: employee }
 #   end
 # end
- 
+
   def new
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render json: employee }
     end
   end
@@ -77,23 +81,44 @@ class EmployeesController < ApplicationController
 private
 
   def employees
-    @employees ||= current_company.employees
+    @employees ||= begin
+      current_company.employees.
+        includes(roster_dates: { rosters: { project: :customer }}).
+        default_order(params[:order]).
+        merge(Roster.default_order)
+    end
   end
 
   def employee
-    @employee ||= employees.find(params[:id])
+    @employee ||= employees.find params[:id]
   end
 
   def new_employee
     @employee = employees.build(params[:employee])
   end
 
-  def build_employee_rates 
+  def build_employee_rates
     employee.employee_rates.build
   end
 
   def set_current_employee
     self.current_employee = employee
-  end  
+  end
+
+  def rosters_start_date
+    @rosters_start_date ||= Date.today.beginning_of_week :sunday
+  end
+
+  def rosters_end_date
+    @rosters_end_date ||= begin
+      (rosters_start_date + 12.weeks).end_of_week :sunday
+    end
+  end
+
+  def set_return_to_employees_index
+    if params[:rosters]
+      session[:return_to_path] = rosters_employees_path
+    end
+  end
 
 end

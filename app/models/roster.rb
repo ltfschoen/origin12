@@ -1,5 +1,7 @@
 class Roster < ActiveRecord::Base
 
+  DEFAULT_ORDER = "roster_dates.date ASC, rosters.shift ASC"
+
   attr_accessible \
     :customer_id,
     :project_id,
@@ -18,6 +20,10 @@ class Roster < ActiveRecord::Base
   has_one :employee, through: :roster_date
 
   delegate :date, to: :roster_date
+
+  scope :default_order, ->(attribute = nil) {
+    order attribute || DEFAULT_ORDER
+  }
 
   validates_presence_of :project_id
 
