@@ -1,10 +1,12 @@
 class RosterDatesController < ApplicationController
 
+  before_filter :require_user
+
   helper_method \
-      :current_date,
-      :roster_dates,
-      :roster_date,
-      :duplicate_date
+    :current_date,
+    :roster_dates,
+    :roster_date,
+    :duplicate_date
 
   before_filter :build_default_roster_date, only: [ :new, :edit ]
 

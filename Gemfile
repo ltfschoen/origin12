@@ -52,5 +52,6 @@ end
 # gem 'debugger'
 
 gem 'acts_as_tree'
+gem 'authlogic', '~> 3.1.0'
 gem 'taps'
 gem 'thin'

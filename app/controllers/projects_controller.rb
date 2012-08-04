@@ -1,5 +1,7 @@
 class ProjectsController < ApplicationController
 
+  before_filter :require_user
+
   helper_method \
       :customer,
       :customer?,

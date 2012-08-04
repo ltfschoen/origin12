@@ -1,4 +1,7 @@
 class ActivitiesController < ApplicationController
+
+  before_filter :require_user
+
   # GET /activities
   # GET /activities.json
   def index

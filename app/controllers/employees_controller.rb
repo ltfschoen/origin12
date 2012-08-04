@@ -1,5 +1,7 @@
 class EmployeesController < ApplicationController
 
+  before_filter :require_user
+
   helper_method \
     :employee,
     :employees,

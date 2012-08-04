@@ -1,5 +1,7 @@
 class CompaniesController < ApplicationController
 
+  before_filter :require_user
+
   helper_method \
       :companies,
       :company
@@ -61,7 +63,7 @@ class CompaniesController < ApplicationController
   end
 
 private
-  
+
   ### Exposures
 
   def companies
@@ -69,7 +71,7 @@ private
   end
 
   def company
-    @company ||= companies.find(params[:id])    
+    @company ||= companies.find(params[:id])
   end
 
   def new_company

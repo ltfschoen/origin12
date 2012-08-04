@@ -1,5 +1,7 @@
 class CustomersController < ApplicationController
 
+  before_filter :require_user
+
   helper_method \
       :customers,
       :customer

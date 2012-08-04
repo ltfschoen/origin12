@@ -1,5 +1,7 @@
 class TeamsController < ApplicationController
 
+  before_filter :require_user
+
   helper_method \
     :teams,
     :team,
@@ -10,7 +12,7 @@ class TeamsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to teams_path
   end
-  
+
   def index
     respond_to do |format|
       format.html
@@ -20,7 +22,7 @@ class TeamsController < ApplicationController
 
 # def show
 #   respond_to do |format|
-#     format.html 
+#     format.html
 #     format.json { render json: team }
 #   end
 # end

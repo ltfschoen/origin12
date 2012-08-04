@@ -1,5 +1,7 @@
 class RostersController < ApplicationController
 
+  before_filter :require_user
+
   helper_method \
       :current_date,
       :rosters,

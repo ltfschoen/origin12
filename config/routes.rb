@@ -36,6 +36,8 @@ Origin12::Application.routes.draw do
 
   # resources :activities
 
+  resource :session, controller: 'user_session'
+
   root :to => 'roster_dates#index'
 
 end
