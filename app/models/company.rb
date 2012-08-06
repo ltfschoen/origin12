@@ -13,6 +13,7 @@ class Company < ActiveRecord::Base
 
   has_many :company_users
   has_many :users, through: :company_users
+  has_many :employees, through: :users
 
   alias_attribute :display_name, :name
 
