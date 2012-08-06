@@ -13,12 +13,11 @@ class Employee < ActiveRecord::Base
 
   belongs_to :user
 
-  has_many :company_employees
-  has_many :companies, through: :company_employees
-
   has_many :employee_rates
   has_many :schedule_rates
   has_many :roster_dates
+
+  validates_presence_of :first_name, :last_name
 
   scope :company, ->(company) {
     joins(:company_employees).

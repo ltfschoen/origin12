@@ -1,6 +1,6 @@
 class CreateCompanies < ActiveRecord::Migration
   def change
-    create_table :companies do |t|
+    create_table :companies, force: true do |t|
       t.string    :key
       t.string    :name
       t.integer   :parent_id

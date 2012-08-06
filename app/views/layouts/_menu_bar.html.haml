@@ -1,0 +1,24 @@
+%ul.switch.grid_4
+  %li.company_switch
+    - companies = current_user.companies
+    - if companies.length > 1
+      = form_tag switch_companies_path, method: :get do |f|
+        = select_tag :id, options_from_collection_for_select(companies, "id", "display_name", current_company[:id]), id: 'company_switch'
+    - elsif company = companies.first
+      %span.company_name
+        #{company.display_name}
+%ul.nav.grid_6
+  %li= link_to 'Roster', roster_path
+  %li= link_to 'Timesheet', '#'
+  %li= link_to 'Scorecard', '#'
+  %li
+    = link_to 'Admin', '#'
+    %ul
+      %li= link_to 'Companies', companies_path
+      %li= link_to 'Customers', customers_path
+      %li= link_to 'Projects', projects_path
+      %li= link_to 'Employees', employees_path
+      %li= link_to 'Teams', teams_path
+      %li= link_to 'Rosters', rosters_employees_path
+  %li= link_to current_employee.full_name, '#'
+  %li= link_to 'Logout', session_path, method: 'delete'

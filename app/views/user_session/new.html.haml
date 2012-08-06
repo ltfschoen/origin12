@@ -1,0 +1,25 @@
+.grid_6.push_3
+  %h1 Origin12 Roster Login
+  = form_for user_session, url: session_path do |f|
+    - if user_session.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(user_session.errors.count, "error")
+          prohibited:
+        %ul
+          - user_session.errors.full_messages.each do |msg|
+            %li= msg
+    .clearfix
+      .field.email
+        = f.label :email
+        = f.text_field :email
+      .field.password
+        = f.label :password
+        = f.password_field :password
+      .field.remember_me
+        = f.check_box :remember_me
+        = f.label :remember_me
+    %hr
+    .actions
+      = f.submit "Login"
+      = link_to 'Sign Up', new_user_path

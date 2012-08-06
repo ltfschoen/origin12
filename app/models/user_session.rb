@@ -1,14 +1,12 @@
 class UserSession < Authlogic::Session::Base
 
+  INACTIVITY_TIMEOUT = 20.minutes
+
   extend ActiveModel::Naming
 
   logout_on_timeout true
-
-  generalize_credentials_error_messages "Login and password are invalid"
-
-  InactivityTimeout = 20.minutes
-
   remember_me_for 4.weeks
+  generalize_credentials_error_messages "Login and password are invalid"
 
   private
 

@@ -1,6 +1,6 @@
 class CreateEmployees < ActiveRecord::Migration
   def change
-    create_table :employees do |t|
+    create_table :employees, force: true do |t|
       t.string    :key
       t.integer   :user_id
       t.integer   :employment_type_id

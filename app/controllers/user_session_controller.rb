@@ -1,32 +1,38 @@
-class UserSession < ApplicationController
+class UserSessionController < ApplicationController
 
-  before_filter :require_no_user
+  before_filter :require_no_user, only: [ :new, :create ]
 
-  def show
-    respond_to do |format|
-      format.html
-    end
-  end
+  before_filter :require_user, only: [ :destroy ]
 
   def new
     respond_to do |format|
-      if create_user_and_log_in
-        format.html { redirect_to root_path }
-      else
-        format.html { render action: 'show' }
-      end
+      format.html
     end
   end
 
   def create
     respond_to do |format|
       if user_session.save
-        format.html { redirect_back_or_default(root_path) }
+        format.html { redirect_back_or_default root_path }
       else
-        @user = User.new({ :invitation_code => params[:invitation_code] })
-        format.html { render :action => 'show' }
+        format.html { render action: 'new' }
       end
     end
+  end
+
+  def destroy
+    respond_to do |format|
+      current_user_session.destroy
+      format.html { redirect_to root_path }
+    end
+  end
+
+private
+
+  helper_method :user_session
+
+  def user_session
+    @user_session ||= UserSession.new(params[:user_session])
   end
 
 end

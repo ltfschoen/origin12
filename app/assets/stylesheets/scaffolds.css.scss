@@ -100,7 +100,8 @@ form {
     }
   }
 
-  input[type='text'] {
+  input[type='text'],
+  input[type='password'] {
     border: 1px solid #CCC;
     padding: 4px;
   }
@@ -108,7 +109,7 @@ form {
   .actions {
     text-align: right;
   }
-}  
+}
 
 /**
   Field with errors
@@ -143,7 +144,10 @@ form {
     color: #fff; }
   ul li {
     font-size: 12px;
-    list-style: square; } }
+    list-style: none;
+    padding: 4px 0;
+  }
+}
 
 .hidden {
   display: none;

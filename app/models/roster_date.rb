@@ -16,6 +16,7 @@ class RosterDate < ActiveRecord::Base
     scope: [ :company_id, :employee_id ]
 
   belongs_to :employee
+
   belongs_to :company
 
   has_many :rosters, :dependent => :destroy

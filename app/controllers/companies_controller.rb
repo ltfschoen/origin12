@@ -2,10 +2,6 @@ class CompaniesController < ApplicationController
 
   before_filter :require_user
 
-  helper_method \
-      :companies,
-      :company
-
   before_filter :new_company, only: [ :new, :create ]
 
   before_filter :set_current_company, only: [ :switch ]
@@ -64,7 +60,7 @@ class CompaniesController < ApplicationController
 
 private
 
-  ### Exposures
+  helper_method :companies, :company
 
   def companies
     @companies ||= Company.includes(:parent)
@@ -73,6 +69,8 @@ private
   def company
     @company ||= companies.find(params[:id])
   end
+
+  ###
 
   def new_company
     @company ||= begin
@@ -83,7 +81,7 @@ private
   end
 
   def set_current_company
-    self.current_company = company
+    current_company company
   end
 
 end

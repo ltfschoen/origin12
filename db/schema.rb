@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120714100134) do
+ActiveRecord::Schema.define(:version => 20120804214612) do
 
   create_table "activities", :force => true do |t|
     t.string   "key"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(:version => 20120714100134) do
 
   add_index "company_employees", ["company_id", "employee_id"], :name => "index_company_employees_on_company_id_and_employee_id"
   add_index "company_employees", ["employee_id"], :name => "index_company_employees_on_employee_id"
+
+  create_table "company_users", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "company_users", ["company_id", "user_id"], :name => "index_company_users_on_company_id_and_user_id"
+  add_index "company_users", ["user_id"], :name => "index_company_users_on_user_id"
 
   create_table "customers", :force => true do |t|
     t.string   "key"
@@ -167,8 +177,20 @@ ActiveRecord::Schema.define(:version => 20120714100134) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+    t.string   "crypted_password",                 :null => false
+    t.string   "password_salt",                    :null => false
+    t.string   "persistence_token"
+    t.integer  "login_count",       :default => 0
+    t.datetime "last_request_at"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
   end
+
+  add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
+  add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
 
 end

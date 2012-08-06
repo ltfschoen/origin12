@@ -1,6 +1,6 @@
 class CreateEmployeeRates < ActiveRecord::Migration
   def change
-    create_table :employee_rates do |t|
+    create_table :employee_rates, force: true do |t|
       t.integer   :employee_id
       t.integer   :company_id
       t.integer   :team_id

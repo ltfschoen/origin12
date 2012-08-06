@@ -1,0 +1,11 @@
+form#new_user_session {
+  label {
+    white-space: nowrap;
+  }
+  .field > label {
+    width: 8em;
+  }
+  input[type='checkbox'] {
+    margin-left: 10em;
+  }
+}

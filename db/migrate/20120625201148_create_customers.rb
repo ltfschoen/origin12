@@ -1,6 +1,6 @@
 class CreateCustomers < ActiveRecord::Migration
   def change
-    create_table :customers do |t|
+    create_table :customers, force: true do |t|
       t.string    :key
       t.string    :name
       t.integer   :company_id

@@ -1,8 +1,4 @@
 jQuery(document).ready(function($) {
-  $('#employee_switch').change(function() {
-    $(this).closest('form').trigger('submit');
-  });
-
   $('.employees form button.add_assignment')
     .on('click', function() {
       var $this  = $(this);
@@ -18,5 +14,4 @@ jQuery(document).ready(function($) {
       $tbody.append(html);
       return false;
     });
-
 });

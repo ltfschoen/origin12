@@ -23,20 +23,22 @@ Origin12::Application.routes.draw do
   resources :roster_dates, :controller => 'roster_dates'
 
   # To duplication a week of roster dates
-  get  'roster_dates/:duplicate_date/copy' \
-      => 'roster_dates#copy',
-      as: 'copy_roster_date'
+  get  'roster_dates/:duplicate_date/copy' => 'roster_dates#copy',
+    as: 'copy_roster_date'
 
-  post 'roster_dates/duplicate' \
-      => 'roster_dates#duplicate',
-      as: 'copy_roster_dates'
+  post 'roster_dates/duplicate' => 'roster_dates#duplicate',
+    as: 'copy_roster_dates'
 
   # Human-readable shortcut to RosterDate resources
   get 'roster' => 'roster_dates#index'
 
   # resources :activities
 
-  resource :session, controller: 'user_session'
+  resource :session,
+    controller: 'user_session',
+    only: [ :new, :create, :destroy ]
+
+  resources :users, only: [ :new, :create ]
 
   root :to => 'roster_dates#index'
 

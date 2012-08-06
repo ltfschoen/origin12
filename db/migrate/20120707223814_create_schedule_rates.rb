@@ -1,6 +1,6 @@
 class CreateScheduleRates < ActiveRecord::Migration
   def change
-    create_table :schedule_rates do |t|
+    create_table :schedule_rates, force: true do |t|
       t.integer :company_id
       t.integer :customer_id
       t.integer :employee_id
