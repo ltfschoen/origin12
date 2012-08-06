@@ -4,8 +4,8 @@ class CreateCompanyUsers < ActiveRecord::Migration
       t.integer :company_id
       t.integer :user_id
       t.timestamps
-    end rescue nil
-    add_index :company_users, [ :company_id, :user_id ] rescue nil
-    add_index :company_users, :user_id rescue nil
+    end
+    add_index :company_users, [ :company_id, :user_id ]
+    add_index :company_users, :user_id
   end
 end
