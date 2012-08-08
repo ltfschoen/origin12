@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   def create
     respond_to do |format|
       if user.save
+        current_company current_user.default_company
         format.html { redirect_to root_path }
       else
         format.html { render action: 'new' }

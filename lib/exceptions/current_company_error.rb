@@ -1,0 +1,2 @@
+class CurrentCompanyError < RuntimeError
+end

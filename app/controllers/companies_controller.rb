@@ -4,8 +4,6 @@ class CompaniesController < ApplicationController
 
   before_filter :new_company, only: [ :new, :create ]
 
-  before_filter :set_current_company, only: [ :switch ]
-
   def index
     respond_to do |format|
       format.html
@@ -15,6 +13,7 @@ class CompaniesController < ApplicationController
 
   def switch
     respond_to do |format|
+      current_company company
       format.html { redirect_to request.referer }
       format.json { render json: company }
     end
@@ -75,13 +74,9 @@ private
   def new_company
     @company ||= begin
       Company.root.children.build(params[:company]).tap do |company|
-        company.company_employees.build(employee_id: current_employee[:id])
+        company.company_users.build(user_id: current_user[:id])
       end
     end
-  end
-
-  def set_current_company
-    current_company company
   end
 
 end

@@ -13,6 +13,7 @@ class UserSessionController < ApplicationController
   def create
     respond_to do |format|
       if user_session.save
+        current_company current_user.default_company
         format.html { redirect_back_or_default root_path }
       else
         format.html { render action: 'new' }

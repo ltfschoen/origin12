@@ -36,9 +36,10 @@ Origin12::Application.routes.draw do
 
   # resources :activities
 
-  resource :session,
-    controller: 'user_session',
-    only: [ :new, :create, :destroy ]
+  resource :session, controller: 'user_session', only: [ :new, :create, :destroy ]
+
+  get 'login'  => 'user_session#new'
+  get 'logout' => 'user_session#destroy'
 
   resources :users, only: [ :new, :create ]
 

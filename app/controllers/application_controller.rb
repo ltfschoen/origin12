@@ -1,3 +1,5 @@
+require 'exceptions/current_company_error'
+
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
@@ -37,9 +39,7 @@ protected
         if session[:current_company_id].present?
           current_user.companies.find(session[:current_company_id])
         else
-          company = current_user.companies.first
-          session[:current_company_id] = company[:id]
-          company
+          raise CurrentCompanyError
         end
       end
     end

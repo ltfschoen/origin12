@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
 
   has_many :companies, through: :company_users
 
+  def default_company
+    companies.first
+  end
+
   ###
 
   after_initialize :initialize_employee

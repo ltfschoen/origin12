@@ -2,19 +2,13 @@ class RosterDatesController < ApplicationController
 
   before_filter :require_user
 
-  helper_method \
-    :current_date,
-    :roster_dates,
-    :roster_date,
-    :duplicate_date
-
   before_filter :build_default_roster_date, only: [ :new, :edit ]
 
   before_filter :build_roster_date, only: [ :create ]
 
-  rescue_from ActiveRecord::RecordNotFound do
-    redirect_to roster_path
-  end
+  # rescue_from ActiveRecord::RecordNotFound do
+    # redirect_to roster_path
+  # end
 
   def index
     respond_to do |format|
@@ -87,7 +81,11 @@ class RosterDatesController < ApplicationController
 
 private
 
-  ### Exposures
+  helper_method \
+    :current_date,
+    :roster_dates,
+    :roster_date,
+    :duplicate_date
 
   def roster_dates
     @roster_dates ||= begin

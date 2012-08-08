@@ -7,6 +7,8 @@ class Role < ActiveRecord::Base
     :name,
     :parent_id
 
-  scope :default, where(default: true)
+  def self.default
+    where(default: true).order('created_at DESC').limit(1).first
+  end
 
 end

@@ -2,7 +2,7 @@ michael:
   id: 1
   key: MBAM
   user_id: 1
-  role_id: 2
+  role_id: 1
   first_name: Michael
   last_name: Bamford
   started_at: <%= Date.parse('2012-03-21') %>
@@ -11,7 +11,7 @@ hernus:
   id: 2
   key: HCAR
   user_id: 2
-  role_id: 1
+  role_id: 2
   first_name: Hernus
   last_name: Carelsen
   started_at: <%= Date.parse('2011-06-01') %>

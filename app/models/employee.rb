@@ -21,8 +21,8 @@ class Employee < ActiveRecord::Base
   validates_presence_of :first_name, :last_name
 
   scope :company, ->(company) {
-    joins(:company_employees).
-    where(company_employees: { company_id: company[:id] })
+    joins(:user => :company_users).
+    where(company_users: { company_id: company[:id] })
   }
 
   scope :default_order, ->(attribute) {
