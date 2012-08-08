@@ -42,14 +42,6 @@ class Employee < ActiveRecord::Base
     [ self.first_name, self.last_name ].compact.join(' ')
   end
 
-  # def roster_date(date, company)
-  #   roster_date = roster_dates(date).company(company).limit(1).first
-  #   if roster_date.nil?
-  #     roster_date = roster_dates.company(company).date(date).create!
-  #   end
-  #   roster_date
-  # end
-
   def destroy
     touch :deleted_at
   end
