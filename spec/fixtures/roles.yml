@@ -5,10 +5,12 @@ user:
 
 admin:
   id: 2
+  parent_id: 1
   key: admin
   name: Admin
 
 root:
   id: 3
+  parent_id: 2
   key: root
   name: Root

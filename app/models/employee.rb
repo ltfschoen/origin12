@@ -51,7 +51,9 @@ class Employee < ActiveRecord::Base
   end
 
   def role?(role_key)
-    role && role.key == role_key
+    if role
+      role.self_and_ancestors.map(&:key).include?(role_key)
+    end
   end
 
 private

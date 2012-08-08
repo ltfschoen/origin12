@@ -8,11 +8,23 @@
 
 ActiveRecord::Base.transaction do
 
-  Company.find_or_create_by_key!(key: 'O12', name: 'Origin12')
+  origin12 = Company.find_or_create_by_key!(key: 'O12', name: 'Origin12')
 
   user  = Role.find_or_create_by_key!(key: 'user', name: 'User')
   admin = Role.find_or_create_by_key!(key: 'admin', name: 'Admin', parent_id: user[:id])
-  Role.find_or_create_by_key!(key: 'root', name: 'Root', parent_id: admin[:id])
+  root  = Role.find_or_create_by_key!(key: 'root', name: 'Root', parent_id: admin[:id])
+
+  su = User.find_or_create_by_email!(
+    email: 'root@origin12.com',
+    password: 'root',
+    password_confirmation: 'root',
+    employee_attributes: { first_name: 'root', last_name: 'root'})
+  su.employee.role = root
+  su.save!
+
+  unless su.companies.include? origin12
+    su.companies << origin12
+  end
 
   activities = [
     {
