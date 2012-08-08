@@ -10,8 +10,8 @@ class AddAuthlogicColumns < ActiveRecord::Migration
     add_column :users, :last_login_ip,     :string
     add_column :users, :current_login_ip,  :string
 
-    add_index :users, :persistence_token
-    add_index :users, :last_request_at
+    add_index :users, :persistence_token rescue nil
+    add_index :users, :last_request_at rescue nil
   end
 
   def down

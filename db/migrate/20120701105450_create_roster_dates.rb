@@ -7,6 +7,6 @@ class CreateRosterDates < ActiveRecord::Migration
       t.boolean		:locked
       t.timestamps
     end
-    add_index :roster_dates, [ :company_id, :employee_id, :date ], unique: true
+    add_index :roster_dates, [ :company_id, :employee_id, :date ], unique: true rescue nil
   end
 end

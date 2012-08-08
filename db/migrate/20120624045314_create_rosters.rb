@@ -13,7 +13,7 @@ class CreateRosters < ActiveRecord::Migration
       t.timestamps
       t.datetime  :deleted_at
     end
-    add_index :rosters, :roster_date_id
-    add_index :rosters, :project_id
+    add_index :rosters, :roster_date_id rescue nil
+    add_index :rosters, :project_id rescue nil
   end
 end
