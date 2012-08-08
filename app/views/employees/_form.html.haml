@@ -17,6 +17,9 @@
   .field.employee_employment_type_id
     = f.label :employment_type_id, 'Employee Type'
     %span Permanent
+  .field.employee_role_id
+    = f.label :role_id, 'Role'
+    = f.collection_select :role_id, Role.all, :id, :name
   .field.employee_started_at
     = f.label :started_at, 'Start Date'
     = f.date_select :started_at, { order: [ :day, :month, :year ]}
@@ -46,7 +49,7 @@
             = employee_rate.collection_select :team_id, current_company.teams, 'id', 'display_name', prompt: true
           %td.until
             - if employee_rate.object.until
-              = employee_rate.date_select :until, order: [ :day, :month, :year ]              
+              = employee_rate.date_select :until, order: [ :day, :month, :year ]
             - else
               = employee_rate.date_select :until, prompt: true, start_year: Time.now.year - 1, order: [ :day, :month, :year ]
           %td.delete
@@ -62,7 +65,7 @@
           .actions
             = button_tag 'Add Assignment', class: 'add_assignment'
   %hr
-  .actions    
+  .actions
     = f.submit 'Save'
     = link_to 'Back', employees_path
 

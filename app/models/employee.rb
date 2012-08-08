@@ -8,6 +8,7 @@ class Employee < ActiveRecord::Base
     :last_name,
     :started_at,
     :terminated_at,
+    :role_id,
     :employee_rates_attributes,
     :schedule_rates_attributes
 
