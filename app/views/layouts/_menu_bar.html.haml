@@ -8,17 +8,18 @@
       %span.company_name
         #{company.display_name}
 %ul.nav.grid_6
-  %li= link_to 'Roster', roster_path
-  %li= link_to 'Timesheet', '#'
-  %li= link_to 'Scorecard', '#'
-  %li
-    = link_to 'Admin', '#'
-    %ul
-      %li= link_to 'Companies', companies_path
-      %li= link_to 'Customers', customers_path
-      %li= link_to 'Projects', projects_path
-      %li= link_to 'Employees', employees_path
-      %li= link_to 'Teams', teams_path
-      %li= link_to 'Rosters', rosters_employees_path
-  %li= link_to current_employee.full_name, '#'
   %li= link_to 'Logout', session_path, method: 'delete'
+  / %li= link_to current_employee.full_name, '#'
+  / %li= link_to 'Scorecard', '#'
+  / %li= link_to 'Timesheet', '#'
+  - if current_employee.role?('admin')
+    %li
+      = link_to 'Admin', '#'
+      %ul
+        %li= link_to 'Companies', companies_path
+        %li= link_to 'Customers', customers_path
+        %li= link_to 'Projects', projects_path
+        %li= link_to 'Employees', employees_path
+        %li= link_to 'Teams', teams_path
+        %li= link_to 'Rosters', rosters_employees_path
+  %li= link_to 'Roster', roster_path

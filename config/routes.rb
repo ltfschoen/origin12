@@ -1,5 +1,7 @@
 Origin12::Application.routes.draw do
 
+  resources :roles
+
   resources :companies, only: [ :index, :new, :create, :edit, :update ] do
     collection { get :switch }
   end

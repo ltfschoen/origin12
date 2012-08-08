@@ -1,0 +1,23 @@
+%h1 Listing roles
+
+%table
+  %tr
+    %th Parent
+    %th Name
+    %th Deleted at
+    %th
+    %th
+    %th
+
+  - @roles.each do |role|
+    %tr
+      %td= role.parent_id
+      %td= role.name
+      %td= role.deleted_at
+      %td= link_to 'Show', role
+      %td= link_to 'Edit', edit_role_path(role)
+      %td= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New Role', new_role_path

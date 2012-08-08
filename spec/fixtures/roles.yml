@@ -1,0 +1,14 @@
+user:
+  id: 1
+  key: user
+  name: User
+
+admin:
+  id: 2
+  key: admin
+  name: Admin
+
+root:
+  id: 3
+  key: root
+  name: Root

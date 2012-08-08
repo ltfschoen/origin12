@@ -7,7 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ActiveRecord::Base.transaction do
+
   Company.find_or_create_by_key!(key: 'O12', name: 'Origin12')
+
+  user  = Role.find_or_create_by_key!(key: 'user', name: 'User')
+  admin = Role.find_or_create_by_key!(key: 'admin', name: 'Admin', parent_id: user[:id])
+  Role.find_or_create_by_key!(key: 'root', name: 'Root', parent_id: admin[:id])
 
   activities = [
     {

@@ -12,6 +12,7 @@ class Employee < ActiveRecord::Base
     :schedule_rates_attributes
 
   belongs_to :user
+  belongs_to :role
 
   has_many :employee_rates
   has_many :schedule_rates
@@ -35,6 +36,8 @@ class Employee < ActiveRecord::Base
   accepts_nested_attributes_for :schedule_rates,
       reject_if: :all_blank
 
+  before_create :assign_default_role
+
   def full_name
     [ self.first_name, self.last_name ].compact.join(' ')
   end
@@ -55,8 +58,14 @@ class Employee < ActiveRecord::Base
     true
   end
 
-  def role?(*roles)
-    true
+  def role?(role_key)
+    role && role.key == role_key
+  end
+
+private
+
+  def assign_default_role
+    self.role = Role.default
   end
 
 end

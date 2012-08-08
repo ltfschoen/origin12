@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120804214612) do
+ActiveRecord::Schema.define(:version => 20120808163504) do
 
   create_table "activities", :force => true do |t|
     t.string   "key"
@@ -119,6 +119,16 @@ ActiveRecord::Schema.define(:version => 20120804214612) do
     t.string   "background_color"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.datetime "deleted_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "key"
+    t.string   "name"
+    t.integer  "parent_id"
+    t.boolean  "default"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.datetime "deleted_at"
   end
 

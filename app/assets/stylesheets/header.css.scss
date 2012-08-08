@@ -22,6 +22,12 @@ body.application {
       top: 15px;
     }
 
+    ul.nav {
+      > li {
+        float: right;
+      }
+    }
+
     .company_name {
       color: white;
     }
