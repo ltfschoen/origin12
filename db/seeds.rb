@@ -14,13 +14,15 @@ ActiveRecord::Base.transaction do
   admin = Role.find_or_create_by_key!(key: 'admin', name: 'Admin', parent_id: user[:id])
   root  = Role.find_or_create_by_key!(key: 'root', name: 'Root', parent_id: admin[:id])
 
-  su = User.find_or_create_by_email!(
+  su = User.find_or_initialize_by_email \
     email: 'root@origin12.com',
     password: 'root',
     password_confirmation: 'root',
-    employee_attributes: { first_name: 'root', last_name: 'root'})
+    employee_attributes: { first_name: nil, last_name: 'root'}
+
+  su.employee.key = 'ROOT'
   su.employee.role = root
-  su.save!
+  su.save(validate: false)
 
   unless su.companies.include? origin12
     su.companies << origin12
