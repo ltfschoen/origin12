@@ -20,6 +20,9 @@ class Employee < ActiveRecord::Base
   has_many :schedule_rates
   has_many :roster_dates
 
+  has_many :company_employees
+  has_many :companies, through: :company_employees
+
   validates_presence_of :first_name, :last_name
 
   scope :company, ->(company) {

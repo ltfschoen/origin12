@@ -45,16 +45,6 @@ ActiveRecord::Schema.define(:version => 20120808163504) do
   add_index "company_employees", ["company_id", "employee_id"], :name => "index_company_employees_on_company_id_and_employee_id"
   add_index "company_employees", ["employee_id"], :name => "index_company_employees_on_employee_id"
 
-  create_table "company_users", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "company_users", ["company_id", "user_id"], :name => "index_company_users_on_company_id_and_user_id"
-  add_index "company_users", ["user_id"], :name => "index_company_users_on_user_id"
-
   create_table "customers", :force => true do |t|
     t.string   "key"
     t.string   "name"
@@ -79,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20120808163504) do
   create_table "employees", :force => true do |t|
     t.string   "key"
     t.integer  "user_id"
+    t.string   "email"
     t.integer  "employment_type_id"
     t.integer  "role_id"
     t.string   "first_name"

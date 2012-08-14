@@ -14,19 +14,22 @@ class User < ActiveRecord::Base
 
   ###
 
-  has_one :employee, autosave: true
+  # has_one :employee, autosave: true
+  has_one :employee
 
-  accepts_nested_attributes_for :employee
+  # accepts_nested_attributes_for :employee
 
-  delegate :first_name, :last_name, :display_name, to: :employee
+  # delegate :first_name, :last_name, :display_name, to: :employee
 
   ###
 
-  has_many :company_users
+  # has_many :company_users
 
-  accepts_nested_attributes_for :company_users
+  # accepts_nested_attributes_for :company_users
 
-  has_many :companies, through: :company_users
+  # has_many :companies, through: :company_users
+
+  has_many :companies, through: :employee
 
   def default_company
     companies.first
@@ -34,14 +37,14 @@ class User < ActiveRecord::Base
 
   ###
 
-  after_initialize :initialize_employee
+  # after_initialize :initialize_employee
 
 private
 
   def initialize_employee
     if new_record?
       build_employee unless employee.present?
-      company_users.build if company_users.empty?
+      # company_users.build if company_users.empty?
     end
   end
 

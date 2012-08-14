@@ -15,3 +15,10 @@ hernus:
   first_name: Hernus
   last_name: Carelsen
   started_at: <%= Date.parse('2011-06-01') %>
+
+root:
+  id: 3
+  key: ROOT
+  user_id: 3
+  role_id: 3
+  last_name: root

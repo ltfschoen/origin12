@@ -11,9 +11,10 @@ class Company < ActiveRecord::Base
   has_many :teams
   has_many :roster_dates
 
-  has_many :company_users
-  has_many :users, through: :company_users
-  has_many :employees, through: :users
+  has_many :company_employees
+  has_many :employees, through: :company_employees
+
+  has_many :users, through: :employees
 
   alias_attribute :display_name, :name
 

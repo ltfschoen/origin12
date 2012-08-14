@@ -85,6 +85,7 @@ private
   def employees
     @employees ||= begin
       current_company.employees.
+        includes(:user).
         includes(roster_dates: { rosters: { project: :customer }}).
         default_order(params[:order]).
         merge(Roster.default_order)

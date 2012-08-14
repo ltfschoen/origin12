@@ -9,3 +9,9 @@ hernus:
   email: hernus.carelson@origin12.com
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+
+root:
+  id: 3
+  email: root@origin12.com
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>

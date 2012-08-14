@@ -3,10 +3,11 @@
   .grid_8.push_2.clearfix
     %table
       %tr
-        %th Number
+        %th Key
         %th Full Name
         %th Date Started
         %th Role
+        %th.activated Activated
         %th &nbsp;
       - employees.each do |employee|
         %tr{ color_cycle }
@@ -14,12 +15,13 @@
           %td= employee.full_name
           %td= employee.started_at ? employee.started_at.to_s(:long) : '&nbsp;'.html_safe
           %td= employee.role.name
+          %td.activated= employee.user.present? ? "&#10003".html_safe : "&nbsp;".html_safe
           %td
             .actions
               = # link_to 'Show', employee
               = link_to 'Edit', edit_employee_path(employee)
               = # link_to 'Destroy', employee, :confirm => 'Are you sure?', :method => :delete
       %tr
-        %td{ colspan: '5' }
+        %td{ colspan: '6' }
           .actions
             = link_to 'Add New Employee', new_employee_path

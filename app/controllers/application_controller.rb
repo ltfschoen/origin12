@@ -37,7 +37,7 @@ protected
     else
       @current_company ||= begin
         if session[:current_company_id].present?
-          current_user.companies.find(session[:current_company_id])
+          current_employee.companies.find(session[:current_company_id])
         else
           raise CurrentCompanyError
         end
