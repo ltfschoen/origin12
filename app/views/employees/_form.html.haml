@@ -8,12 +8,15 @@
   .field.employee_key
     = f.label :key, 'Employee Number'
     = f.text_field :key
+  .field.employee_key
+    = f.label :email, 'Email'
+    = f.text_field :email, placeholder: 'required'
   .field.employee_first_name
     = f.label :first_name, 'First Name'
-    = f.text_field :first_name
+    = f.text_field :first_name, placeholder: 'required'
   .field.employee_last_name
     = f.label :last_name, 'Last Name'
-    = f.text_field :last_name
+    = f.text_field :last_name, placeholder: 'required'
   .field.employee_employment_type_id
     = f.label :employment_type_id, 'Employee Type'
     %span Permanent

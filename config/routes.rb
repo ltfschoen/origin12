@@ -41,7 +41,9 @@ Origin12::Application.routes.draw do
   get 'login'  => 'user_session#new'
   get 'logout' => 'user_session#destroy'
 
-  resources :users, only: [ :new, :create ]
+  # resource :user, except: [ :destroy ]
+  resources :users, except: [ :destroy ]
+
 
   root :to => 'roster_dates#index'
 

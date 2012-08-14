@@ -3,14 +3,15 @@ class Employee < ActiveRecord::Base
   DEFAULT_ORDER = "employees.key"
 
   attr_accessible \
-    :key,
-    :first_name,
-    :last_name,
-    :started_at,
-    :terminated_at,
-    :role_id,
-    :employee_rates_attributes,
-    :schedule_rates_attributes
+      :email,
+      :employee_rates_attributes,
+      :first_name,
+      :key,
+      :last_name,
+      :role_id,
+      :schedule_rates_attributes,
+      :started_at,
+      :terminated_at
 
   belongs_to :user
   belongs_to :role
@@ -43,6 +44,8 @@ class Employee < ActiveRecord::Base
     [ self.first_name, self.last_name ].compact.join(' ')
   end
 
+  alias :display_name :full_name
+
   def destroy
     touch :deleted_at
   end
@@ -60,7 +63,9 @@ class Employee < ActiveRecord::Base
 private
 
   def assign_default_role
-    self.role = Role.default
+    if role.nil?
+      self.role = Role.default
+    end
   end
 
 end

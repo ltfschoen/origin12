@@ -48,18 +48,20 @@ protected
 protected
 
   def require_user
-    return true if current_user
-    store_location
-    redirect_to new_session_path
-    false
+    unless current_user
+      store_location
+      redirect_to new_session_path
+      false
+    end
   end
 
   def require_no_user
-    return true unless current_user
-    store_location
-    flash[:notice] = "You must be logged out to access this page"
-    redirect_to session_path, method: 'delete'
-    false
+    if current_user
+      store_location
+      flash[:notice] = "You must be logged out to access this page"
+      redirect_to logout_path
+      false
+    end
   end
 
   def redirect_back_or_default(default)

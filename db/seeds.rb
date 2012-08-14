@@ -1,31 +1,36 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 ActiveRecord::Base.transaction do
 
-  origin12 = Company.find_or_create_by_key!(key: 'O12', name: 'Origin12')
+  origin12 = Company.find_or_create_by_key! \
+      key: 'O12',
+      name: 'Origin12'
 
-  user  = Role.find_or_create_by_key!(key: 'user', name: 'User')
-  admin = Role.find_or_create_by_key!(key: 'admin', name: 'Admin', parent_id: user[:id])
-  root  = Role.find_or_create_by_key!(key: 'root', name: 'Root', parent_id: admin[:id])
+  user_role  = Role.find_or_create_by_key! \
+      key: 'user',
+      name: 'User',
+      default: true
 
-  su = User.find_or_initialize_by_email \
-    email: 'root@origin12.com',
-    password: 'root',
-    password_confirmation: 'root',
-    employee_attributes: { first_name: nil, last_name: 'root'}
+  admin_role = Role.find_or_create_by_key! \
+      key: 'admin',
+      name: 'Admin',
+      parent_id: user_role[:id]
 
-  su.employee.key = 'ROOT'
-  su.employee.role = root
-  su.save(validate: false)
+  root_role  = Role.find_or_create_by_key! \
+      key: 'root',
+      name: 'Root',
+      parent_id: admin_role[:id]
 
-  unless su.companies.include? origin12
-    su.companies << origin12
+  root = User.find_or_initialize_by_email \
+      email: 'root@origin12.com',
+      password: 'root',
+      password_confirmation: 'root',
+      employee_attributes: { first_name: nil, last_name: 'root'}
+
+  root.employee.key = 'ROOT'
+  root.employee.role = root_role
+  root.save(validate: false)
+
+  unless root.companies.include? origin12
+    root.companies << origin12
   end
 
   activities = [

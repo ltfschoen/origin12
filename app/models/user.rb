@@ -12,15 +12,13 @@ class User < ActiveRecord::Base
     config.logged_in_timeout UserSession::INACTIVITY_TIMEOUT
   end
 
-  attr_accessible :email
-
   ###
 
   has_one :employee, autosave: true
 
   accepts_nested_attributes_for :employee
 
-  delegate :first_name, :last_name, to: :employee
+  delegate :first_name, :last_name, :display_name, to: :employee
 
   ###
 

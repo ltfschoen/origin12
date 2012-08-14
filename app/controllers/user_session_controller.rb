@@ -1,8 +1,8 @@
 class UserSessionController < ApplicationController
 
-  before_filter :require_no_user, only: [ :new, :create ]
+  # before_filter :require_no_user, only: [ :new, :create ]
 
-  before_filter :require_user, only: [ :destroy ]
+  # before_filter :require_user, only: [ :destroy ]
 
   def new
     respond_to do |format|
@@ -23,8 +23,8 @@ class UserSessionController < ApplicationController
 
   def destroy
     respond_to do |format|
-      current_user_session.destroy
-      format.html { redirect_to root_path }
+      current_user_session.destroy if current_user_session
+      format.html { redirect_to new_session_path }
     end
   end
 

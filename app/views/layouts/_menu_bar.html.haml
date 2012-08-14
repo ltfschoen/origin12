@@ -8,6 +8,7 @@
       %span.company_name
         #{company.display_name}
 %ul.nav.grid_6
+  %li= link_to current_user.email, edit_user_path(current_user)
   %li= link_to 'Logout', session_path, method: 'delete'
   / %li= link_to current_employee.full_name, '#'
   / %li= link_to 'Scorecard', '#'

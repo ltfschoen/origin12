@@ -2,6 +2,7 @@ user:
   id: 1
   key: user
   name: User
+  default: true
 
 admin:
   id: 2
