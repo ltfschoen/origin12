@@ -19,27 +19,30 @@ ActiveRecord::Base.transaction do
       name: 'Root',
       parent_id: admin_role[:id]
 
-  root_user = User.find_or_create_by_email(
-    {
-      email: 'root@origin12.com',
-      password: 'root',
-      password_confirmation: 'root'
-    },
-    {
-      validate: false
-    })
+  ###
 
   root_employee = Employee.find_or_initialize_by_key \
       key: 'ROOT',
+      email: 'root@origin12.com',
+      first_name: 'root',
       last_name: 'root'
 
-  root_employee.user = root_user
   root_employee.role = root_role
-  root_employee.save validate: false
+  root_employee.save!
 
   unless root_employee.companies.include? origin12
     root_employee.companies << origin12
   end
+
+  root_user = User.find_or_initialize_by_email \
+      email: 'root@origin12.com',
+      password: 'root',
+      password_confirmation: 'root'
+
+  root_user.employee = root_employee
+  root_user.save!
+
+  ###
 
   activities = [
     {
