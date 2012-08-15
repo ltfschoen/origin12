@@ -19,10 +19,15 @@ ActiveRecord::Base.transaction do
       name: 'Root',
       parent_id: admin_role[:id]
 
-  root_user = User.find_or_create_by_email! \
+  root_user = User.find_or_create_by_email(
+    {
       email: 'root@origin12.com',
       password: 'root',
       password_confirmation: 'root'
+    },
+    {
+      validate: false
+    })
 
   root_employee = Employee.find_or_initialize_by_key \
       key: 'ROOT',
@@ -30,7 +35,7 @@ ActiveRecord::Base.transaction do
 
   root_employee.user = root_user
   root_employee.role = root_role
-  root_employee.save(validate: false)
+  root_employee.save validate: false
 
   unless root_employee.companies.include? origin12
     root_employee.companies << origin12
