@@ -10,17 +10,6 @@
           - user.errors.full_messages.each do |msg|
             %li= msg
     .clearfix
-      = f.fields_for :company_users do |company_employee_form|
-        .field.company
-          = company_employee_form.label :company_id, "Company"
-          = company_employee_form.collection_select :company_id, Company.all, :id, :display_name, prompt: true
-      = f.fields_for :employee do |employee_form|
-        .field.first_name
-          = employee_form.label :first_name, "First Name"
-          = employee_form.text_field :first_name
-        .field.last_name
-          = employee_form.label :last_name, "Last Name"
-          = employee_form.text_field :last_name
       .field.email
         = f.label :email, "Email"
         = f.text_field :email
@@ -33,4 +22,4 @@
     %hr
     .actions
       = f.submit "Sign Up"
-      = link_to 'Cancel', :back
+      = link_to 'Cancel', root_path

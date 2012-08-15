@@ -44,7 +44,19 @@ private
 
   def user
     @user ||= begin
-      current_user || User.new(params[:user])
+      current_user || begin
+        User.new(params[:user]) do |user|
+          user.employee = employee
+          user.email = params[:email] if user.email.blank?
+        end
+      end
+    end
+  end
+
+  def employee
+    @employee ||= begin
+      email = params[:user] && params[:user][:email] || params[:email]
+      Employee.find_by_email(email) if email
     end
   end
 

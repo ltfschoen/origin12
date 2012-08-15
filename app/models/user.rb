@@ -1,51 +1,33 @@
 class User < ActiveRecord::Base
 
   attr_accessible \
-    :companies,
-    :email,
-    :password,
-    :password_confirmation,
-    :company_users_attributes,
-    :employee_attributes
+      :companies,
+      :email,
+      :password,
+      :password_confirmation,
+      :company_users_attributes,
+      :employee_attributes
 
   acts_as_authentic do |config|
     config.logged_in_timeout UserSession::INACTIVITY_TIMEOUT
   end
 
-  ###
-
-  # has_one :employee, autosave: true
-  has_one :employee
-
-  # accepts_nested_attributes_for :employee
-
-  # delegate :first_name, :last_name, :display_name, to: :employee
-
-  ###
-
-  # has_many :company_users
-
-  # accepts_nested_attributes_for :company_users
-
-  # has_many :companies, through: :company_users
+  has_one :employee, autosave: true
 
   has_many :companies, through: :employee
+
+  before_create :attach_to_employee
+
+  validates_presence_of :employee, on: :create, :message => 'was not found'
 
   def default_company
     companies.first
   end
 
-  ###
-
-  # after_initialize :initialize_employee
-
 private
 
-  def initialize_employee
-    if new_record?
-      build_employee unless employee.present?
-      # company_users.build if company_users.empty?
-    end
+  def attach_to_employee
+    self.employee = Employee.find_by_email(email)
   end
 
 end

@@ -1,6 +1,6 @@
 class Employee < ActiveRecord::Base
 
-  DEFAULT_ORDER = "employees.key"
+  DEFAULT_ORDER = "employees.last_name"
 
   attr_accessible \
       :email,
@@ -24,6 +24,7 @@ class Employee < ActiveRecord::Base
   has_many :companies, through: :company_employees
 
   validates_presence_of :first_name, :last_name
+  validates_presence_of :email, on: :create
 
   scope :company, ->(company) {
     joins(:user => :company_users).

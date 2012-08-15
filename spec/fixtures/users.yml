@@ -14,4 +14,4 @@ root:
   id: 3
   email: root@origin12.com
   password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("root" + salt) %>
