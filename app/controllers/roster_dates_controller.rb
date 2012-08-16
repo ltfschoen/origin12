@@ -82,10 +82,10 @@ class RosterDatesController < ApplicationController
 private
 
   helper_method \
-    :current_date,
-    :roster_dates,
-    :roster_date,
-    :duplicate_date
+      :current_date,
+      :roster_dates,
+      :roster_date,
+      :duplicate_date
 
   def roster_dates
     @roster_dates ||= begin

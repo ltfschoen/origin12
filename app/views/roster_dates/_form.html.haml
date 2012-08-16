@@ -53,11 +53,12 @@
               %td
                 &nbsp;
             %tr
-              %td
+              %td{ colspan: '2' }
                 .description
                   = roster_form.label :description, 'Note'
                   = roster_form.text_field :description
-              %td
+            %tr
+              %td{ colspan: '2' }
                 .actions
                   = # button_tag 'Add Shift', { type: 'button', class: 'add_shift' }
                   = button_tag 'Add Shift', add_shift_button_style(idx, rosters_count, rosters)
