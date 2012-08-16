@@ -1,6 +1,7 @@
 class Roster < ActiveRecord::Base
 
   DEFAULT_ORDER = "roster_dates.date ASC, rosters.shift ASC"
+  DEFAULT_HOURS = 8
 
   attr_accessible \
     :customer_id,
@@ -46,6 +47,7 @@ private
   def initialize_new_record
     if new_record?
       self.activity = Activity.default
+      self.hours = DEFAULT_HOURS
     end
   end
 
