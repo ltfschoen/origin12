@@ -53,8 +53,7 @@
       padding: 4px;
     }
     .employee_started_at,
-    .employee_terminated_at,
-    .until {
+    .employee_terminated_at {
       select {
         &:nth-of-type(1) {
           width: 5em;
@@ -68,9 +67,6 @@
       }
     }
     table.employee_rates {
-      width: 100%;
-      max-width: 100%;
-
       td {
         padding: 5px;
       }
@@ -83,6 +79,10 @@
 
       td, th {
         text-align: left;
+      }
+
+      label {
+        width: auto;
       }
 
       input[type='text'] {
