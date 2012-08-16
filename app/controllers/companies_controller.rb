@@ -74,7 +74,7 @@ private
   def new_company
     @company ||= begin
       Company.root.children.build(params[:company]).tap do |company|
-        company.company_users.build(user_id: current_user[:id])
+        company.company_employees.build(employee_id: current_employee[:id])
       end
     end
   end
