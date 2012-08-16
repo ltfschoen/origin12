@@ -58,8 +58,11 @@ class RosterDate < ActiveRecord::Base
   end
 
   def build_default_rosters
-    (MAXIMUM_SHIFTS - rosters.length).times do |shift|
-      rosters.build shift: shift
+    rosters_length = rosters.length
+    remaining_shifts = MAXIMUM_SHIFTS - rosters_length
+    remaining_shifts.times do |shift|
+      shift_index = rosters_length + shift - 1
+      rosters.build shift: shift_index
     end
   end
 

@@ -11,7 +11,7 @@
         = calendar.day(id: 'date_%Y%m%d') do |date, roster_date|
           - if roster_date = roster_date.first
             = link_to_calendar_date roster_date.date, edit_roster_date_path(roster_date)
-            - roster_date.rosters.each do |roster|
+            - roster_date.rosters.sort_by(&:shift).each do |roster|
               = link_to roster.project.customer.key, edit_roster_date_path(roster_date), { class: "roster activity_#{roster.activity[:id]}" }
           - else
             = link_to_calendar_date date, new_roster_date_path(date: date)

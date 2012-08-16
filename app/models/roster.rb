@@ -46,8 +46,8 @@ private
 
   def initialize_new_record
     if new_record?
-      self.activity = Activity.default
-      self.hours = DEFAULT_HOURS
+      self.activity ||= Activity.default
+      self.hours ||= DEFAULT_HOURS
     end
   end
 
