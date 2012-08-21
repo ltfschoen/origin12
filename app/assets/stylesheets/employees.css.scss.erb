@@ -43,15 +43,18 @@
     .field {
       display: block;
       margin: 0.5em 0;
+      clear: both;
       label {
         display: inline-block;
         width: 10em;
       }
     }
+
     input[type='text'] {
       border: 1px solid #CCC;
       padding: 4px;
     }
+
     .employee_started_at,
     .employee_terminated_at {
       select {
@@ -66,6 +69,20 @@
         }
       }
     }
+
+    .company_ids {
+      label {
+        float: left;
+      }
+      label.company {
+        font-weight: normal;
+      }
+      label.company + label.company {
+        clear: left;
+          margin-left: 10em;
+      }
+    }
+
     table.employee_rates {
       td {
         padding: 5px;

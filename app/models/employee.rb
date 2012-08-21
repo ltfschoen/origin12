@@ -3,6 +3,7 @@ class Employee < ActiveRecord::Base
   DEFAULT_ORDER = "employees.last_name"
 
   attr_accessible \
+      :company_ids,
       :email,
       :employee_rates_attributes,
       :first_name,
@@ -60,7 +61,7 @@ class Employee < ActiveRecord::Base
 
   def role?(role_key)
     if role
-      role.self_and_ancestors.map(&:key).include?(role_key)
+      role.self_and_ancestors.map { |role| role.key.downcase }.include?(role_key.downcase)
     end
   end
 

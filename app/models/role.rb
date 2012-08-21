@@ -9,7 +9,11 @@ class Role < ActiveRecord::Base
 
   acts_as_tree order: 'name'
 
+  scope :default_order, order('name ASC')
+
   has_many :employees
+
+  alias_attribute :display_name, :name
 
   def self.default
     where(default: true).order('created_at DESC').limit(1).first

@@ -14,10 +14,15 @@ ActiveRecord::Base.transaction do
       name: 'Admin',
       parent_id: user_role[:id]
 
+  cross_company_role = Role.find_or_create_by_key! \
+      key: 'cross_company',
+      name: 'Cross Company',
+      parent_id: admin_role[:id]
+
   root_role  = Role.find_or_create_by_key! \
       key: 'root',
       name: 'Root',
-      parent_id: admin_role[:id]
+      parent_id: cross_company_role[:id]
 
   ###
 

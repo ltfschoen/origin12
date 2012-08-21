@@ -23,7 +23,14 @@
     %span Permanent
   .field.employee_role_id
     = f.label :role_id, 'Role'
-    = f.collection_select :role_id, Role.all, :id, :name
+    = f.collection_select :role_id, Role.default_order.all, :id, :display_name
+  - if current_employee.role?('root')
+    .field.clearfix.company_ids
+      %label Companies
+      - Company.default_order.each do |company|
+        %label.company
+          = check_box_tag "employee[company_ids][]", company[:id], employee.companies.include?(company), id: "company_#{company[:id]}", class: "company"
+          = company.display_name
   .field.employee_started_at
     = f.label :started_at, 'Start Date'
     = f.date_select :started_at, { order: [ :day, :month, :year ]}

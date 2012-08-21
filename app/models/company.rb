@@ -16,6 +16,8 @@ class Company < ActiveRecord::Base
 
   has_many :users, through: :employees
 
+  scope :default_order, order('name ASC')
+
   alias_attribute :display_name, :name
 
   def self_and_children
