@@ -51,36 +51,42 @@ ActiveRecord::Base.transaction do
 
   activities = [
     {
+      key: 'one_hundred_percent',
       description: '100% Probability',
       display_order: 10,
       color: '#FFF',
       background_color: 'Green'
     },
     {
+      key: 'ninety_percent',
       description: '90% Probability',
       display_order: 20,
       color: '#FFF',
       background_color: 'DarkTurquoise'
     },
     {
+      key: 'fifty_percent',
       description: '50% Probability',
       display_order: 30,
       color: '#000',
       background_color: 'Yellow'
     },
     {
+      key: 'ten_percent',
       description: '10% Probability',
       display_order: 40,
       color: '#FFF',
       background_color: 'FireBrick'
     },
     {
+      key: 'planned_bench',
       description: 'Planned Bench',
       display_order: 50,
       color: '#FFF',
       background_color: 'Grey'
     },
     {
+      key: 'unplanned_bench',
       description: 'Unplanned Bench',
       display_order: 60,
       color: '#FFF',
@@ -88,24 +94,28 @@ ActiveRecord::Base.transaction do
       default: true
     },
     {
+      key: 'nonworking_day',
       description: 'Non-Working Day',
       display_order: 70,
       color: '#FFF',
-      background_color: 'Grey'
+      background_color: '#EEE'
     },
     {
+      key: 'sick_leave',
       description: 'Sick Leave',
       display_order: 80,
       color: '#FFF',
       background_color: 'DeepSkyBlue '
     },
     {
+      key: 'time_off_in_lieu',
       description: 'Time Off in Lieu',
       display_order: 90,
       color: '#FFF',
       background_color: 'DeepSkyBlue '
     },
     {
+      key: 'annual_leave',
       description: 'Annual Leave',
       display_order: 100,
       color: '#FFF',

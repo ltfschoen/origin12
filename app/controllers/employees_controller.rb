@@ -22,7 +22,7 @@ class EmployeesController < ApplicationController
 
   def index
     respond_to do |format|
-      format.html
+      format.html { store_location }
       format.json { render json: employees }
     end
   end
@@ -97,7 +97,11 @@ private
   end
 
   def new_employee
-    @employee = employees.build(params[:employee])
+    @employee ||= begin
+      employees.build(params[:employee]) do |employee|
+        employee.role = Role.default
+      end
+    end
   end
 
   def build_employee_rates

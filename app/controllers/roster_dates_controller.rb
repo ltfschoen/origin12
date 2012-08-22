@@ -83,13 +83,24 @@ private
 
   helper_method \
       :current_date,
+      :employee,
       :roster_dates,
       :roster_date,
       :duplicate_date
 
+  def employee
+    @employee ||= begin
+      if current_employee.role?('admin') && params[:employee_id]
+        current_company.employees.find(params[:employee_id])
+      else
+        current_employee
+      end
+    end
+  end
+
   def roster_dates
     @roster_dates ||= begin
-      current_employee.roster_dates.
+      employee.roster_dates.
         company(current_company).
         includes(:rosters).
         default_order.
@@ -100,7 +111,7 @@ private
   def roster_date
     @roster_date ||= begin
       if params[:id]
-        current_employee.roster_dates.company(current_company).find(params[:id])
+        employee.roster_dates.company(current_company).find(params[:id])
       else
         new_roster_date
       end
@@ -109,7 +120,7 @@ private
 
   def new_roster_date
     date = params[:date] ? Date.parse(params[:date]) : Date.today
-    @roster_date = current_employee.roster_dates.build(date: date)
+    @roster_date = employee.roster_dates.build(date: date)
   end
 
   def build_roster_date
@@ -132,7 +143,8 @@ private
       session[:return_to_path] = edit_roster_date_path(roster_date)
       redirect_to project_schedule_rates_path(project_id)
     else
-      redirect_to roster_dates_path, notice: "Roster week was successfully #{params[:action]}d."
+      flash[:notice] = "Roster week was successfully #{params[:action]}d."
+      redirect_back_or_default roster_dates_path
     end
   end
 

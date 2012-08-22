@@ -15,7 +15,8 @@
         %tbody
           - employees.each do |employee|
             %tr{ color_cycle }
-              %td.employee_key= employee.full_name
+              %td.employee_key
+                = employee.full_name
               - roster_dates_group_by_beginning_of_week.values.each do |dates_of_week|
                 - dates_of_week.each do |date|
                   - roster_date = employee_roster_date employee, date
@@ -27,6 +28,8 @@
                         - rosters.each do |roster|
                           %div{ (class_for roster, total_hours), (title_for roster) }
                             &nbsp;
+                    - else
+                      = link_to "&nbsp;".html_safe, (new_employee_roster_date_path employee, date: date)
           %tr
             %td{ colspan: "#{13 * 7 + 2}" }
               .actions

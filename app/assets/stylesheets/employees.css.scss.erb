@@ -34,6 +34,12 @@
     tbody tr:first-child td {
       border-top: none;
     }
+
+    td.wday_0,
+    td.wday_6 {
+      color: <%= Activity.nonworking_day.color %>;
+      background-color: <%= Activity.nonworking_day.background_color %>;
+    }
     td.wday_6 {
       border-right: 1px solid grey;
     }

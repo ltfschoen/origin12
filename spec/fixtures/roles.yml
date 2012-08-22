@@ -10,8 +10,14 @@ admin:
   key: admin
   name: Admin
 
-root:
+cross_company:
   id: 3
   parent_id: 2
+  key: cross_company
+  name: Cross Company
+
+root:
+  id: 4
+  parent_id: 3
   key: root
   name: Root
