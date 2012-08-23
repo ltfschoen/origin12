@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_admin
 
   before_filter :new_company, only: [ :new, :create ]
 

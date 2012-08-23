@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_admin
 
   helper_method \
     :teams,

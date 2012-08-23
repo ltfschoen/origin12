@@ -1,14 +1,8 @@
 class ProjectsController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_admin, only: [ :new, :create, :edit, :update ]
 
-  helper_method \
-      :customer,
-      :customer?,
-      :customers,
-      :projects,
-      :project,
-      :managers
+  before_filter :require_user, only: [ :index ]
 
   rescue_from ActiveRecord::RecordNotFound do
     redirect_to projects_path
@@ -71,6 +65,14 @@ class ProjectsController < ApplicationController
   # end
 
 private
+
+  helper_method \
+      :customer,
+      :customer?,
+      :customers,
+      :projects,
+      :project,
+      :managers
 
   def customer
     @customer ||= begin

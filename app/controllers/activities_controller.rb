@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
 
-  before_filter :require_user
+  before_filter :require_admin
 
   # GET /activities
   # GET /activities.json

@@ -48,9 +48,20 @@ protected
 protected
 
   def require_user
-    unless current_user
+    if current_user
+      true
+    else
       store_location
       redirect_to new_session_path
+      false
+    end
+  end
+
+  def require_admin
+    if require_user && current_employee.role?('admin')
+      true
+    else
+      redirect_to root_path
       false
     end
   end
