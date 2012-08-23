@@ -1,4 +1,5 @@
-= form_for roster_date do |f|
+- url = current_employee.role?('admin') ? [ employee, roster_date ] : roster_date
+= form_for url do |f|
   = f.hidden_field :date
   = hidden_field_tag :schedule_rates_project_id, ''
   -if roster_date.errors.any?

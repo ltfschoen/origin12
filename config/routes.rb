@@ -15,7 +15,7 @@ Origin12::Application.routes.draw do
   resources :employees, except: [ :show ] do
     collection { get :switch }
     collection { get :rosters, :action => 'index', view: 'rosters' }
-    resources :roster_dates, only: [ :new, :create ]
+    resources :roster_dates, only: [ :new, :create, :edit, :update ]
   end
 
   # AJAX get a collection of projects for selected customer
