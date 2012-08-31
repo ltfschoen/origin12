@@ -26,6 +26,7 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'debugger'
   gem 'heroku', '~> 2.30'
   gem 'rspec-rails', '~> 2.11'
   gem 'autotest'
