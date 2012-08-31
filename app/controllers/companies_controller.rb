@@ -2,8 +2,6 @@ class CompaniesController < ApplicationController
 
   before_filter :require_admin
 
-  before_filter :new_company, only: [ :new, :create ]
-
   def index
     respond_to do |format|
       format.html
@@ -66,16 +64,16 @@ private
   end
 
   def company
-    @company ||= companies.find(params[:id])
+    @company ||= begin
+      params[:id] ? companies.find(params[:id]) : new_company
+    end
   end
 
   ###
 
   def new_company
-    @company ||= begin
-      Company.root.children.build(params[:company]).tap do |company|
-        company.company_employees.build(employee_id: current_employee[:id])
-      end
+    Company.root.children.build(params[:company]).tap do |company|
+      company.company_employees.build(employee_id: current_employee[:id])
     end
   end
 
