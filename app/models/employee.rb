@@ -1,5 +1,6 @@
 class Employee < ActiveRecord::Base
 
+  ROOT_KEY = 'ROOT'
   DEFAULT_ORDER = "employees.last_name"
 
   attr_accessible \
@@ -44,6 +45,12 @@ class Employee < ActiveRecord::Base
       reject_if: :all_blank
 
   before_create :assign_default_role
+
+  def self.root
+    @root ||= begin
+      find_by_key ROOT_KEY
+    end
+  end
 
   def full_name
     [ self.first_name, self.last_name ].compact.join(' ')

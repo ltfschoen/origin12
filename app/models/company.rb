@@ -20,6 +20,12 @@ class Company < ActiveRecord::Base
 
   alias_attribute :display_name, :name
 
+  before_create :assign_root_as_employee
+
+  def self.default_employee
+    Employee.root
+  end
+
   def self_and_children
     self.class.where([ 'id = ? OR parent_id = ?', self[:id], self[:id] ])
   end
@@ -27,6 +33,14 @@ class Company < ActiveRecord::Base
   def managers
     # TODO Define managers
     employees
+  end
+
+private
+
+  def assign_root_as_employee
+    unless employees.include?(Employee.root)
+      employees.push(Employee.root)
+    end
   end
 
 end
