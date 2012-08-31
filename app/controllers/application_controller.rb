@@ -58,7 +58,7 @@ protected
   end
 
   def require_admin
-    if require_user && current_employee.role?('admin')
+    if current_employee && current_employee.role?('admin')
       true
     else
       redirect_to root_path
