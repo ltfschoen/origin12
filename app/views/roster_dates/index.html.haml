@@ -1,24 +1,27 @@
 .roster_dates
   .grid_12
-    %h1#month #{h current_employee.full_name} Roster
+    %h1#month #{h employee.full_name} Roster
   .nav.grid_12
-    = link_to 'Current 4 Weeks', roster_dates_path(from: Date.today, until: ''), class: 'grid_2 push_1'
-    = link_to 'Previous 4 Weeks', roster_dates_path(from: calendar_from - 4.weeks), class: 'grid_2 push_7'
-  .grid_10
-    .calendar.push_1
-      = calendar_for roster_dates, first: calendar_from, last: calendar_until do |calendar|
-        = calendar.head 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'
-        = calendar.day(id: 'date_%Y%m%d') do |date, roster_date|
-          - if roster_date = roster_date.first
-            = link_to_calendar_date roster_date.date, edit_roster_date_path(roster_date)
-            - roster_date.rosters.sort_by(&:shift).each do |roster|
-              = link_to roster.project.customer.key, edit_roster_date_path(roster_date), { class: "roster activity_#{roster.activity[:id]}" }
-          - else
-            = link_to_calendar_date date, new_roster_date_path(date: date)
-          - if date.saturday?
-            = link_to 'Copy', copy_roster_date_path(date.beginning_of_week(:sunday)), { class: 'duplicate' }
-          = # link_to 'Delete', roster_date, data: { confirm: 'Are you sure?' }, method: :delete, class: 'delete'
+    = link_to 'Current 4 Weeks', employee_roster_dates_path(employee, from: Date.today, until: ''), class: 'grid_2 push_1'
+    = link_to 'Previous 4 Weeks', employee_roster_dates_path(employee, from: calendar_from - 4.weeks), class: 'grid_2 push_7'
+  .calendar.grid_10.push_1
+    = calendar_for roster_dates, first: calendar_from, last: calendar_until do |calendar|
+      = calendar.head 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'
+      = calendar.day(id: 'date_%Y%m%d') do |date, roster_date|
+        - if roster_date = roster_date.first
+          = link_to_calendar_date roster_date.date, edit_roster_date_path(roster_date)
+          - roster_date.rosters.sort_by(&:shift).each do |roster|
+            = link_to roster.project.customer.key, edit_roster_date_path(roster_date), { class: "roster activity_#{roster.activity[:id]}" }
+        - else
+          = link_to_calendar_date date, new_roster_date_path(date: date)
+        - if date.saturday?
+          = link_to 'Copy', copy_roster_date_path(date.beginning_of_week(:sunday)), { class: 'duplicate' }
+        = # link_to 'Delete', roster_date, data: { confirm: 'Are you sure?' }, method: :delete, class: 'delete'
   .nav.grid_12
-    .grid_1
+    .grid_8.alpha
       &nbsp;
-    = link_to 'Next 4 Weeks', roster_dates_path(until: calendar_until + 4.weeks), class: 'grid_2 push_8'
+    .grid_3.omega
+      - if current_employee.role?('admin')
+        = link_to 'Rosters', rosters_employees_path
+        &nbsp;|&nbsp;
+      = link_to 'Next 4 Weeks', (employee_roster_dates_path employee, until: calendar_until + 4.weeks)

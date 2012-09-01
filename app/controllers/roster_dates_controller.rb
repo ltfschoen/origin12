@@ -82,7 +82,6 @@ class RosterDatesController < ApplicationController
 private
 
   helper_method \
-      :current_date,
       :employee,
       :roster_dates,
       :roster_date,

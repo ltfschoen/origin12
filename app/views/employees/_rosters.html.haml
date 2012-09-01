@@ -16,20 +16,21 @@
           - employees.each do |employee|
             %tr{ color_cycle }
               %td.employee_key
-                = employee.full_name
-              - roster_dates_group_by_beginning_of_week.values.each do |dates_of_week|
+                = link_to employee.full_name, (employee_roster_dates_path employee)
+              - roster_dates_group_by_beginning_of_week.each do |dates_of_week_by_beginning_of_week|
+                - beginning_of_week, dates_of_week = dates_of_week_by_beginning_of_week
                 - dates_of_week.each do |date|
                   - roster_date = employee_roster_date employee, date
                   %td.wday{ (wday_class date) }
                     - if roster_date
                       - rosters = roster_date.rosters
                       - total_hours = rosters.sum(&:hours)
-                      = link_to (edit_employee_roster_date_path employee, roster_date) do
+                      = link_to (employee_roster_dates_path employee, from: beginning_of_week) do
                         - rosters.each do |roster|
                           %div{ (class_for roster, total_hours), (title_for roster) }
                             &nbsp;
                     - else
-                      = link_to "&nbsp;".html_safe, (new_employee_roster_date_path employee, date: date)
+                      = link_to "&nbsp;".html_safe, (employee_roster_dates_path employee, from: beginning_of_week)
           %tr
             %td{ colspan: "#{13 * 7 + 2}" }
               .actions
