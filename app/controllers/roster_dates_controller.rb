@@ -60,7 +60,7 @@ class RosterDatesController < ApplicationController
 
   def duplicate
     respond_to do |format|
-      if RosterDate.duplicate current_employee, current_company, params[:duplicate]
+      if RosterDate.duplicate employee, current_company, params[:duplicate]
         format.html { redirect_to roster_dates_path, notice: 'Roster week was successfully duplicated.' }
         format.json { head :no_content }
       else

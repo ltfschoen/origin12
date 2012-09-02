@@ -15,10 +15,17 @@ Origin12::Application.routes.draw do
   resources :employees, except: [ :show ] do
     collection { get :switch }
     collection { get :rosters, :action => 'index', view: 'rosters' }
-    resources :roster_dates, only: [ :index, :new, :create, :edit, :update ]
+    resources :roster_dates, only: [ :index, :new, :create, :edit, :update ] do
+      collection do
+        get :copy
+        post :copy
+      end
+      # collection { post 'duplicate' }
+      # post '' { post :duplicate }
+    end
   end
 
-  # AJAX get a collection of projects for selected customer
+  # AJAX get a collection of projects
   resources :projects, only: [ :index, :new, :create, :update ] do
     resources :schedule_rates, only: [ :index, :new, :create ]
   end
@@ -26,13 +33,10 @@ Origin12::Application.routes.draw do
   resources :roster_dates, :controller => 'roster_dates'
 
   # To duplication a week of roster dates
-  get  'roster_dates/:duplicate_date/copy' => 'roster_dates#copy',
-    as: 'copy_roster_date'
+  # get  'roster_dates/:duplicate_date/copy' => 'roster_dates#copy', as: 'copy_roster_date'
+  # post 'roster_dates/duplicate' => 'roster_dates#duplicate', as: 'copy_roster_dates'
 
-  post 'roster_dates/duplicate' => 'roster_dates#duplicate',
-    as: 'copy_roster_dates'
-
-  # Human-readable shortcut to RosterDate resources
+  # Human-readable shortcut to current_employee's roster date
   get 'roster' => 'roster_dates#index'
 
   # resources :activities
@@ -42,7 +46,6 @@ Origin12::Application.routes.draw do
   get 'login'  => 'user_session#new'
   get 'logout' => 'user_session#destroy'
 
-  # resource :user, except: [ :destroy ]
   resources :users, except: [ :destroy ]
 
   root :to => 'roster_dates#index'

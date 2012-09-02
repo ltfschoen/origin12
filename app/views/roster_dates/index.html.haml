@@ -9,13 +9,14 @@
       = calendar.head 'Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'
       = calendar.day(id: 'date_%Y%m%d') do |date, roster_date|
         - if roster_date = roster_date.first
-          = link_to_calendar_date roster_date.date, edit_roster_date_path(roster_date)
+          = link_to_calendar_date roster_date.date, (edit_employee_roster_date_path employee, roster_date)
           - roster_date.rosters.sort_by(&:shift).each do |roster|
-            = link_to roster.project.customer.key, edit_roster_date_path(roster_date), { class: "roster activity_#{roster.activity[:id]}" }
+            = link_to roster.project.customer.key, (edit_employee_roster_date_path employee, roster_date), { class: "roster activity_#{roster.activity[:id]}" }
         - else
-          = link_to_calendar_date date, new_roster_date_path(date: date)
+          = link_to_calendar_date date, new_employee_roster_date_path(employee, date: date)
         - if date.saturday?
-          = link_to 'Copy', copy_roster_date_path(date.beginning_of_week(:sunday)), { class: 'duplicate' }
+          =# link_to 'Copy', copy_roster_date_path(date.beginning_of_week(:sunday)), { class: 'duplicate' }
+          = link_to 'Copy', copy_employee_roster_dates_path(employee, duplicate_date: date.beginning_of_week(:sunday)), { class: 'duplicate' }
         = # link_to 'Delete', roster_date, data: { confirm: 'Are you sure?' }, method: :delete, class: 'delete'
   .nav.grid_12
     .grid_8.alpha
