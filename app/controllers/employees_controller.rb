@@ -105,7 +105,9 @@ private
   end
 
   def build_employee_rates
-    employee.employee_rates.build
+    if employee.employee_rates.length == 0
+      employee.employee_rates.build
+    end
   end
 
   def set_current_employee

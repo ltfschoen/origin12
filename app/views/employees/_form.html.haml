@@ -63,7 +63,7 @@
               - if employee_rate.object.until
                 = employee_rate.date_select :until, order: [ :day, :month, :year ]
               - else
-                = employee_rate.date_select :until, prompt: true, start_year: Time.now.year - 1, order: [ :day, :month, :year ]
+                = employee_rate.date_select :until, { prompt: true, start_year: Time.now.year - 1, order: [ :day, :month, :year ] }, { class: 'invisible' }
             %td.delete
               - if employee_rate.object.new_record?
                 = employee_rate.check_box :_destroy, disabled: true
