@@ -143,7 +143,7 @@ private
       redirect_to project_schedule_rates_path(project_id)
     else
       flash[:notice] = "Roster week was successfully #{params[:action]}d."
-      redirect_back_or_default roster_dates_path
+      redirect_to (current_employee.role?('admin') ? (employee_roster_dates_path employee) : roster_dates_path)
     end
   end
 

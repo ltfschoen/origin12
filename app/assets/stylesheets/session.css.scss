@@ -2,7 +2,7 @@ form#new_user_session {
   label {
     white-space: nowrap;
   }
-  .field > label:first-child {
+  .field label:first-child {
     width: 8em;
   }
   input[type='text'],

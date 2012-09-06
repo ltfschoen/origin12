@@ -77,11 +77,15 @@ protected
 
   def redirect_back_or_default(default)
     redirect_to session[:return_to_path] || default
-    session[:return_to_path] = nil
+    clear_location
   end
 
   def store_location
     session[:return_to_path] = request.fullpath
+  end
+
+  def clear_location
+    session[:return_to_path] = nil
   end
 
 end
