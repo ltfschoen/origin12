@@ -16,7 +16,7 @@
           = link_to_calendar_date date, new_employee_roster_date_path(employee, date: date)
         - if date.saturday?
           =# link_to 'Copy', copy_roster_date_path(date.beginning_of_week(:sunday)), { class: 'duplicate' }
-          = link_to 'Copy', copy_employee_roster_dates_path(employee, duplicate_date: date.beginning_of_week(:sunday)), { class: 'duplicate' }
+          = link_to 'Copy', copy_employee_roster_dates_path(employee, date: date.beginning_of_week(:sunday)), { class: 'duplicate' }
         = # link_to 'Delete', roster_date, data: { confirm: 'Are you sure?' }, method: :delete, class: 'delete'
   .nav.grid_12
     .grid_8.alpha

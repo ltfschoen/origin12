@@ -17,8 +17,8 @@ Origin12::Application.routes.draw do
     collection { get :rosters, :action => 'index', view: 'rosters' }
     resources :roster_dates, only: [ :index, :new, :create, :edit, :update ] do
       collection do
-        get ':duplicate_date/copy', action: 'copy', as: 'copy'
-        post :duplicate, as: 'copy'
+        get  :copy
+        post :copy, action: 'duplicate'
       end
     end
   end

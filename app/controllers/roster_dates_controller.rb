@@ -61,7 +61,10 @@ class RosterDatesController < ApplicationController
   def duplicate
     respond_to do |format|
       if RosterDate.duplicate employee, current_company, params[:duplicate]
-        format.html { redirect_to roster_dates_path, notice: 'Roster week was successfully duplicated.' }
+        format.html do
+          path = current_employee.role?('admin') ? (employee_roster_dates_path employee) : roster_dates_path
+          redirect_to path, notice: 'Roster week was successfully duplicated.'
+        end
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -131,7 +134,7 @@ private
   end
 
   def duplicate_date
-    @duplicate_date ||= Date.parse(params[:duplicate_date])
+    @duplicate_date ||= Date.parse(params[:date])
   end
 
   ###
